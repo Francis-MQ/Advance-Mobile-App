@@ -8,17 +8,12 @@ import 'react-native-reanimated';
 
 import { useColorScheme } from '@/components/useColorScheme';
 
-export {
-  // Catch any errors thrown by the Layout component.
-  ErrorBoundary,
-} from 'expo-router';
-
+// Keep the tabs as the initial route
 export const unstable_settings = {
-  // Ensure that reloading on `/modal` keeps a back button present.
   initialRouteName: '(tabs)',
 };
 
-// Prevent the splash screen from auto-hiding before asset loading is complete.
+// Don’t auto-hide until fonts are ready
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
@@ -27,20 +22,15 @@ export default function RootLayout() {
     ...FontAwesome.font,
   });
 
-  // Expo Router uses Error Boundaries to catch errors in the navigation tree.
   useEffect(() => {
     if (error) throw error;
   }, [error]);
 
   useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
-    }
+    if (loaded) SplashScreen.hideAsync();
   }, [loaded]);
 
-  if (!loaded) {
-    return null;
-  }
+  if (!loaded) return null;
 
   return <RootLayoutNav />;
 }
@@ -50,9 +40,26 @@ function RootLayoutNav() {
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
+      <Stack
+        screenOptions={{
+          headerShown: false, // tabs hide the header; details screens can override below
+        }}
+      >
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen name="signup" options={{ title: 'Sign Up' }} />
         <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
+
+        {/* Playlist Details (dark header like Spotify) */}
+        <Stack.Screen
+          name="playlist/[id]"
+          options={{
+            headerShown: true,
+            title: 'Playlist',
+            headerStyle: { backgroundColor: '#121212' },
+            headerTintColor: '#fff',
+            headerTitleStyle: { fontWeight: '800' },
+          }}
+        />
       </Stack>
     </ThemeProvider>
   );

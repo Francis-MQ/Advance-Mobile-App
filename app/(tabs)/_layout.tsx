@@ -70,6 +70,34 @@ export default function TabLayout() {
           tabBarIcon: ({ color }) => <TabBarIcon name="user-circle" color={color} />,
         }}
       />
+      <Tabs.Screen
+        name="profile"
+        options={{
+          title: "Profile",
+          tabBarIcon: ({ color }) => <TabBarIcon name="user" color={color} />,
+          headerStyle: { backgroundColor: "#121212" },
+          headerTitleStyle: { color: "#fff", fontWeight: "800" },
+          headerTintColor: "#fff",
+        }}
+      />
+
+      <Tabs.Screen
+        name="settings"
+        options={{
+          title: "Settings",
+          tabBarIcon: ({ color }) => <TabBarIcon name="cog" color={color} />,
+          headerStyle: { backgroundColor: "#121212" },
+          headerTitleStyle: { color: "#fff", fontWeight: "800" },
+          headerTintColor: "#fff",
+         }}
+      />
+      <Tabs.Screen
+        name="playlists"
+        options={{
+          title: "Playlists",
+          tabBarIcon: ({ color }) => <FontAwesome name="music" size={28} color={color} />
+        }}
+      />
     </Tabs>
   );
 }

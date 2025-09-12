@@ -17,6 +17,7 @@ import {
 import * as Haptics from "expo-haptics";
 import { FontAwesome } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
+import { useRouter } from "expo-router";   // ← Option B
 
 // ---- Theme (Spotify-ish)
 const SPOTIFY_GREEN = "#1DB954";
@@ -28,6 +29,8 @@ const MUTED = "#b3b3b3";
 const WHITE = "#ffffff";
 
 export default function LoginScreen() {
+  const router = useRouter();              // ← Option B
+
   // animation for logo + wordmark
   const fade = useRef(new Animated.Value(0)).current;
   const slide = useRef(new Animated.Value(12)).current;
@@ -74,7 +77,7 @@ export default function LoginScreen() {
         >
           <View style={styles.logoContainer}>
             <Image
-              source={require("../../assets/images/logo.png")}
+              source={require("../../assets/images/logo.png")}   // ← from (tabs) to app/assets
               style={styles.logo}
               resizeMode="contain"
             />
@@ -152,9 +155,7 @@ export default function LoginScreen() {
         {/* Sign up link */}
         <View style={styles.footerRow}>
           <Text style={styles.footerText}>Don't have an account? </Text>
-          <TouchableOpacity
-            onPress={() => Alert.alert("Sign Up", "This would open sign up.")}
-          >
+          <TouchableOpacity onPress={() => router.push("/signup")}>
             <Text style={[styles.footerText, { color: SPOTIFY_GREEN }]}>
               Sign Up
             </Text>
@@ -218,7 +219,7 @@ const styles = StyleSheet.create({
 
   linkText: { color: MUTED, textAlign: "center", marginTop: 10 },
 
-  // new circular social buttons
+  // circular social buttons
   socialRow: {
     flexDirection: "row",
     justifyContent: "center",
@@ -230,11 +231,11 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     borderRadius: 25,
-    backgroundColor: "#181818", // dark circle
+    backgroundColor: "#181818",
     alignItems: "center",
     justifyContent: "center",
-    elevation: 6, // Android glow
-    shadowColor: "#000", // iOS glow
+    elevation: 6,
+    shadowColor: "#000",
     shadowOpacity: 0.6,
     shadowOffset: { width: 0, height: 2 },
     shadowRadius: 6,
