@@ -9,4 +9,15 @@
 #LoginSpotify:
 <img width="1080" height="2400" alt="Screenshot_1757060174" src="https://github.com/user-attachments/assets/f2a10235-b3a3-4507-86ea-0ddc7fca85fd" />
 
+#ProfileActivity
+<img width="1080" height="2400" alt="Screenshot_1757658837" src="https://github.com/user-attachments/assets/c6141567-7b7c-402f-aae5-53687793f793" />
+
+#Signup
+<img width="1080" height="2400" alt="Screenshot_1757658854" src="https://github.com/user-attachments/assets/fc249185-e8c8-4e4e-8178-c1b809353947" />
+
+#Settings
+<img width="1080" height="2400" alt="Screenshot_1757658843" src="https://github.com/user-attachments/assets/f0e272f9-b0a9-4c55-9aa5-719500118c4b" />
+
+#Playlists
+<img width="1080" height="2400" alt="Screenshot_1757658459" src="https://github.com/user-attachments/assets/cd960674-231f-4ce0-a73f-30f535738120" />
 
