@@ -2,15 +2,8 @@
 import React from 'react';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { Tabs } from 'expo-router';
-import { Platform } from 'react-native';
-
-// NOTE: If your Colors file exports default, keep this line.
-// If it exports a named { Colors }, switch the import accordingly.
 import Colors from '@/constants/Colors';
-// import { Colors } from '@/constants/Colors';
-
 import { useColorScheme } from '@/components/useColorScheme';
-import { useClientOnlyValue } from '@/components/useClientOnlyValue';
 
 function TabBarIcon(props: {
   name: React.ComponentProps<typeof FontAwesome>['name'];
@@ -26,78 +19,17 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        // keep web hydration safe header behavior like the new template
-        headerShown: useClientOnlyValue(false, true),
-        // float the tab bar on iOS like your old layout
-        tabBarStyle: Platform.select({
-          ios: { position: 'absolute' },
-          default: {},
-        }),
+        tabBarStyle: { display: 'none' }, // hide bottom tab bar
+        headerShown: false,               // root header handles the title + hamburger
       }}
     >
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
-        }}
-      />
-
-      {/* If your second tab file is named `two.tsx`, keep `name="two"`; 
-          if you renamed it to `explore.tsx`, change to name="explore". */}
-      <Tabs.Screen
-        name="two"
-        options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <TabBarIcon name="paper-plane" color={color} />,
-        }}
-      />
-
-      {/* Showcase tab (requires app/(tabs)/showcase.tsx) */}
-      <Tabs.Screen
-        name="showcase"
-        options={{
-          title: 'Showcase',
-          tabBarIcon: ({ color }) => <TabBarIcon name="th-large" color={color} />,
-        }}
-      />
-
-      {/* Login tab (requires app/(tabs)/login.tsx) */}
-      <Tabs.Screen
-        name="login"
-        options={{
-          title: 'Login',
-          tabBarIcon: ({ color }) => <TabBarIcon name="user-circle" color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="profile"
-        options={{
-          title: "Profile",
-          tabBarIcon: ({ color }) => <TabBarIcon name="user" color={color} />,
-          headerStyle: { backgroundColor: "#121212" },
-          headerTitleStyle: { color: "#fff", fontWeight: "800" },
-          headerTintColor: "#fff",
-        }}
-      />
-
-      <Tabs.Screen
-        name="settings"
-        options={{
-          title: "Settings",
-          tabBarIcon: ({ color }) => <TabBarIcon name="cog" color={color} />,
-          headerStyle: { backgroundColor: "#121212" },
-          headerTitleStyle: { color: "#fff", fontWeight: "800" },
-          headerTintColor: "#fff",
-         }}
-      />
-      <Tabs.Screen
-        name="playlists"
-        options={{
-          title: "Playlists",
-          tabBarIcon: ({ color }) => <FontAwesome name="music" size={28} color={color} />
-        }}
-      />
+      <Tabs.Screen name="index"     options={{ title: 'Home',      tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} /> }} />
+      <Tabs.Screen name="two"       options={{ title: 'Explore',    tabBarIcon: ({ color }) => <TabBarIcon name="paper-plane" color={color} /> }} />
+      <Tabs.Screen name="showcase"  options={{ title: 'Showcase',   tabBarIcon: ({ color }) => <TabBarIcon name="th-large" color={color} /> }} />
+      <Tabs.Screen name="login"     options={{ title: 'Login',      tabBarIcon: ({ color }) => <TabBarIcon name="user-circle" color={color} /> }} />
+      <Tabs.Screen name="profile"   options={{ title: 'Profile',    tabBarIcon: ({ color }) => <TabBarIcon name="user" color={color} /> }} />
+      <Tabs.Screen name="settings"  options={{ title: 'Settings',   tabBarIcon: ({ color }) => <TabBarIcon name="cog" color={color} /> }} />
+      <Tabs.Screen name="playlists" options={{ title: 'Playlists',  tabBarIcon: ({ color }) => <FontAwesome name="music" size={28} color={color} /> }} />
     </Tabs>
   );
 }
