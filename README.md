@@ -21,3 +21,5 @@
 #Playlists
 <img width="1080" height="2400" alt="Screenshot_1757658459" src="https://github.com/user-attachments/assets/cd960674-231f-4ce0-a73f-30f535738120" />
 
+#Sidebar
+<img width="1080" height="2400" alt="Screenshot_1757677148" src="https://github.com/user-attachments/assets/efecb839-a607-4fc9-b10f-87a7e0195722" />
