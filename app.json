@@ -4,7 +4,7 @@
     "slug": "MainApp",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/favicon.png",
+    "icon": "./assets/images/2.png",
     "scheme": "mainapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
@@ -26,7 +26,7 @@
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "./assets/images/favicon.png"
+      "favicon": "./assets/images/logo.png"
     },
     "plugins": [
       "expo-router"

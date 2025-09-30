@@ -6,7 +6,7 @@ const BG = "#121212";
 const WHITE = "#fff";
 const MUTED = "#b3b3b3";
 
-// tiny mock tracks
+// mock tracks
 const tracks = Array.from({ length: 12 }).map((_, i) => ({
   id: String(i + 1),
   title: `Track ${i + 1}`,
@@ -14,14 +14,17 @@ const tracks = Array.from({ length: 12 }).map((_, i) => ({
 }));
 
 export default function PlaylistDetail() {
-  const { id, title, cover } = useLocalSearchParams<{ id: string; title: string; cover: string }>();
+  const { id, title, cover } = useLocalSearchParams<{
+    id: string;
+    title: string;
+    cover: string;
+  }>();
 
   return (
     <View style={styles.root}>
       <StatusBar barStyle="light-content" />
-      {/* Header (provided by Stack.Screen below) */}
       <Image source={{ uri: cover }} style={styles.cover} />
-      <Text style={styles.title}>{title}</Text>
+      <Text style={styles.title}>{title || `Playlist ${id}`}</Text>
       <Text style={styles.subtitle}>Public • 12 songs</Text>
 
       <FlatList

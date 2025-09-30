@@ -5,7 +5,11 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./*"]
-    }
+    },
+    "jsx": "react-native",              // 👈 Needed for .tsx files
+    "skipLibCheck": true,               // 👈 Ignore type mismatches from node_modules
+    "esModuleInterop": true,            // 👈 Helps with imports
+    "forceConsistentCasingInFileNames": true
   },
   "include": [
     "**/*.ts",
@@ -14,4 +18,3 @@
     "expo-env.d.ts"
   ]
 }
-
