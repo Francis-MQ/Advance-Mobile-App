@@ -27,9 +27,9 @@ Added the following:
    
 ### 1. Gestures
 <img src="https://github.com/user-attachments/assets/61838bfa-cda5-4478-a205-8baa2d0fa118" width="250" />
----
+
 ### 2. Custom Transitions
----
+
 ### 3. Navigation Persistence
 
 
