@@ -20,3 +20,16 @@
 
 ## Playlists
 <img src="https://github.com/user-attachments/assets/cd960674-231f-4ce0-a73f-30f535738120" width="250" />
+
+
+# Week 3: Advanced Navigation
+Added the following:
+   
+### 1. Gestures
+![a5b6a4d7-e0d7-4726-b311-59ccea511850](https://github.com/user-attachments/assets/61838bfa-cda5-4478-a205-8baa2d0fa118)
+---
+### 2. Custom Transitions
+---
+### 3. Navigation Persistence
+
+
