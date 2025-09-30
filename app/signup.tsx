@@ -1,4 +1,4 @@
-// app/signup.tsx
+// app/(auth)/signup.tsx
 import React from "react";
 import {
   KeyboardAvoidingView,
@@ -9,11 +9,12 @@ import {
   TextInput,
   TouchableOpacity,
   View,
-  Alert,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { router } from "expo-router";
+import { useNavigation } from "@react-navigation/native";
+import type { StackNavigationProp } from "@react-navigation/stack";
 
+// ---- Theme (Spotify-ish)
 const SPOTIFY_GREEN = "#1DB954";
 const GREEN_DARK = "#169c46";
 const BG = "#121212";
@@ -22,9 +23,19 @@ const FIELD = "#222";
 const WHITE = "#ffffff";
 const MUTED = "#b3b3b3";
 
+// Auth stack routes (same as login.tsx)
+type AuthStackParamList = {
+  Login: undefined;
+  Signup: undefined;
+  App: undefined; // ✅ main drawer
+};
+
 export default function SignUpScreen() {
+  const navigation = useNavigation<StackNavigationProp<AuthStackParamList>>();
+
   const onSignUp = () => {
-    Alert.alert("Sign Up", "Demo signup flow – wire up later.");
+    // ✅ after sign up, go straight to drawer
+    navigation.replace("App");
   };
 
   return (
@@ -69,7 +80,7 @@ export default function SignUpScreen() {
         {/* Back to Login */}
         <View style={styles.footerRow}>
           <Text style={styles.footerText}>Already have an account? </Text>
-          <TouchableOpacity onPress={() => router.replace("/login")}>
+          <TouchableOpacity onPress={() => navigation.navigate("Login")}>
             <Text style={[styles.footerText, { color: SPOTIFY_GREEN }]}>
               Sign In
             </Text>

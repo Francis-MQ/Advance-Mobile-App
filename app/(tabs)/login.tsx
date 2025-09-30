@@ -1,3 +1,4 @@
+// app/(auth)/login.tsx
 import React, { useEffect, useRef } from "react";
 import {
   Animated,
@@ -12,12 +13,12 @@ import {
   TouchableOpacity,
   View,
   Image,
-  Alert,
 } from "react-native";
 import * as Haptics from "expo-haptics";
 import { FontAwesome } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
-import { useRouter } from "expo-router";   // ← Option B
+import { useNavigation } from "@react-navigation/native";
+import type { StackNavigationProp } from "@react-navigation/stack";
 
 // ---- Theme (Spotify-ish)
 const SPOTIFY_GREEN = "#1DB954";
@@ -28,8 +29,15 @@ const FIELD = "#222";
 const MUTED = "#b3b3b3";
 const WHITE = "#ffffff";
 
+// Auth + App stack routes
+type AuthStackParamList = {
+  Login: undefined;
+  Signup: undefined;
+  App: undefined; // ✅ main drawer
+};
+
 export default function LoginScreen() {
-  const router = useRouter();              // ← Option B
+  const navigation = useNavigation<StackNavigationProp<AuthStackParamList>>();
 
   // animation for logo + wordmark
   const fade = useRef(new Animated.Value(0)).current;
@@ -54,7 +62,8 @@ export default function LoginScreen() {
 
   const onSignIn = async () => {
     await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-    Alert.alert("Signing in", "Demo action – wire your auth here.");
+    // ✅ After login, go to Drawer
+    navigation.replace("App");
   };
 
   return (
@@ -77,7 +86,7 @@ export default function LoginScreen() {
         >
           <View style={styles.logoContainer}>
             <Image
-              source={require("../../assets/images/logo.png")}   // ← from (tabs) to app/assets
+              source={require("../../assets/images/logo.png")}
               style={styles.logo}
               resizeMode="contain"
             />
@@ -86,36 +95,25 @@ export default function LoginScreen() {
         </Animated.View>
 
         {/* Form card */}
-        <View style={styles.card} accessible accessibilityLabel="Login form">
+        <View style={styles.card}>
           <TextInput
             style={styles.input}
             placeholder="Username or email"
             placeholderTextColor={MUTED}
             keyboardType="email-address"
-            textContentType="username"
             autoCapitalize="none"
             returnKeyType="next"
-            accessibilityLabel="Username or email"
-            accessibilityHint="Enter your Spotify username or email"
           />
           <TextInput
             style={styles.input}
             placeholder="Password"
             placeholderTextColor={MUTED}
             secureTextEntry
-            textContentType="password"
             returnKeyType="done"
-            accessibilityLabel="Password"
-            accessibilityHint="Enter your password"
           />
 
           {/* Primary button */}
-          <TouchableOpacity
-            accessibilityRole="button"
-            accessibilityLabel="Sign in"
-            onPress={onSignIn}
-            style={styles.btnShadow}
-          >
+          <TouchableOpacity onPress={onSignIn} style={styles.btnShadow}>
             <LinearGradient
               colors={[SPOTIFY_GREEN, GREEN_DARK]}
               start={{ x: 0, y: 0 }}
@@ -128,25 +126,24 @@ export default function LoginScreen() {
 
           <TouchableOpacity
             onPress={() =>
-              Alert.alert("Forgot Password", "This would open the reset flow.")
+              console.log("TODO: Forgot password flow")
             }
           >
             <Text style={styles.linkText}>Forgot password?</Text>
           </TouchableOpacity>
         </View>
 
-        {/* Social sign-in row (circular buttons only) */}
+        {/* Social sign-in row */}
         <View style={styles.socialRow}>
           <TouchableOpacity
             style={styles.circleBtn}
-            onPress={() => Alert.alert("Facebook", "Continue with Facebook")}
+            onPress={() => console.log("Facebook login")}
           >
             <FontAwesome name="facebook" size={22} color={WHITE} />
           </TouchableOpacity>
-
           <TouchableOpacity
             style={styles.circleBtn}
-            onPress={() => Alert.alert("Google", "Continue with Google")}
+            onPress={() => console.log("Google login")}
           >
             <FontAwesome name="google" size={22} color={WHITE} />
           </TouchableOpacity>
@@ -155,7 +152,7 @@ export default function LoginScreen() {
         {/* Sign up link */}
         <View style={styles.footerRow}>
           <Text style={styles.footerText}>Don't have an account? </Text>
-          <TouchableOpacity onPress={() => router.push("/signup")}>
+          <TouchableOpacity onPress={() => navigation.navigate("Signup")}>
             <Text style={[styles.footerText, { color: SPOTIFY_GREEN }]}>
               Sign Up
             </Text>
@@ -168,15 +165,11 @@ export default function LoginScreen() {
 
 const styles = StyleSheet.create({
   root: { flex: 1, backgroundColor: BG },
-  scroll: { flexGrow: 1, padding: 24, paddingBottom: 40, justifyContent: "center" },
-
-  // header
+  scroll: { flexGrow: 1, padding: 24, justifyContent: "center" },
   logoWrap: { alignItems: "center", marginBottom: 28 },
   logoContainer: { alignItems: "center", justifyContent: "center" },
   logo: { width: 140, height: 140 },
   brand: { color: WHITE, fontSize: 28, fontWeight: "800", marginTop: 6 },
-
-  // card
   card: {
     backgroundColor: CARD,
     borderRadius: 16,
@@ -193,8 +186,6 @@ const styles = StyleSheet.create({
     borderWidth: StyleSheet.hairlineWidth,
     borderColor: "#2c2c2c",
   },
-
-  // primary button
   btnShadow: {
     borderRadius: 999,
     overflow: "hidden",
@@ -216,10 +207,7 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     letterSpacing: 0.3,
   },
-
   linkText: { color: MUTED, textAlign: "center", marginTop: 10 },
-
-  // circular social buttons
   socialRow: {
     flexDirection: "row",
     justifyContent: "center",
@@ -234,13 +222,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#181818",
     alignItems: "center",
     justifyContent: "center",
-    elevation: 6,
-    shadowColor: "#000",
-    shadowOpacity: 0.6,
-    shadowOffset: { width: 0, height: 2 },
-    shadowRadius: 6,
   },
-
   footerRow: { flexDirection: "row", justifyContent: "center", marginTop: 6 },
   footerText: { color: MUTED },
 });
