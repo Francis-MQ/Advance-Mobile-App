@@ -26,7 +26,7 @@
 Added the following:
    
 ### 1. Gestures
-![a5b6a4d7-e0d7-4726-b311-59ccea511850](https://github.com/user-attachments/assets/61838bfa-cda5-4478-a205-8baa2d0fa118)
+<img src="https://github.com/user-attachments/assets/61838bfa-cda5-4478-a205-8baa2d0fa118" width="250" />
 ---
 ### 2. Custom Transitions
 ---
