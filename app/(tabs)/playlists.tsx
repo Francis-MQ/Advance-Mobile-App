@@ -1,3 +1,4 @@
+// app/(tabs)/playlists.tsx
 import React from "react";
 import {
   View,
@@ -9,13 +10,15 @@ import {
   StatusBar,
 } from "react-native";
 import { router } from "expo-router";
+import { FontAwesome } from "@expo/vector-icons";
+import { usePlaylist } from "@/context/PlaylistContext";
 
 const BG = "#121212";
 const CARD = "#181818";
 const WHITE = "#fff";
 const MUTED = "#b3b3b3";
+const GREEN = "#1DB954";
 
-// ---- Mock playlists
 const DATA = [
   { id: "1", title: "Daily Mix 1",   subtitle: "Indie • Chill",     cover: require("../../assets/images/cover1.jpeg") },
   { id: "2", title: "Top Hits",      subtitle: "Pop • Today",       cover: require("../../assets/images/cover2.jpeg") },
@@ -26,11 +29,30 @@ const DATA = [
 ];
 
 export default function PlaylistsScreen() {
+  const { state } = usePlaylist();
+
   return (
     <View style={styles.root}>
       <StatusBar barStyle="light-content" />
       <Text style={styles.header}>Playlists</Text>
 
+      {/* “My Playlist” card */}
+      <TouchableOpacity activeOpacity={0.9} style={styles.myCard}>
+        <View style={styles.myIconWrap}>
+          <FontAwesome name="headphones" size={22} color={WHITE} />
+        </View>
+        <View style={{ flex: 1 }}>
+          <Text style={styles.myTitle}>My Playlist</Text>
+          <Text style={styles.mySub} numberOfLines={1}>
+            {state.songs.length} {state.songs.length === 1 ? "song" : "songs"} • live
+          </Text>
+        </View>
+        <View style={styles.badge}>
+          <Text style={styles.badgeText}>{state.songs.length}</Text>
+        </View>
+      </TouchableOpacity>
+
+      {/* Grid */}
       <FlatList
         data={DATA}
         keyExtractor={(item) => item.id}
@@ -52,17 +74,14 @@ export default function PlaylistsScreen() {
               accessibilityRole="button"
               accessibilityLabel={`Open ${item.title}`}
             >
-              {/* Force a perfect square for the cover */}
               <View style={styles.coverWrap}>
                 <Image source={item.cover} style={styles.cover} resizeMode="cover" />
               </View>
-
-              {/* Fixed-height text block so every card has same height */}
               <View style={styles.meta}>
-                <Text style={styles.title} numberOfLines={1} ellipsizeMode="tail">
+                <Text style={styles.title} numberOfLines={1}>
                   {item.title}
                 </Text>
-                <Text style={styles.subtitle} numberOfLines={1} ellipsizeMode="tail">
+                <Text style={styles.subtitle} numberOfLines={1}>
                   {item.subtitle}
                 </Text>
               </View>
@@ -86,6 +105,38 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
   },
 
+  // My playlist card
+  myCard: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 12,
+    backgroundColor: CARD,
+    borderRadius: 16,
+    padding: 14,
+    marginHorizontal: 16,
+    marginBottom: 12,
+  },
+  myIconWrap: {
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    backgroundColor: "#173e2a",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  myTitle: { color: WHITE, fontWeight: "800", fontSize: 16 },
+  mySub: { color: MUTED, marginTop: 2, fontSize: 12 },
+  badge: {
+    minWidth: 26,
+    height: 26,
+    paddingHorizontal: 6,
+    borderRadius: 13,
+    backgroundColor: GREEN,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  badgeText: { color: "#0e3d22", fontWeight: "800" },
+
   listPad: { paddingHorizontal: 16, paddingBottom: 24 },
   row: { gap: 12 },
 
@@ -100,18 +151,14 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowRadius: 4,
   },
-
-  // square wrapper defines exact image box
   coverWrap: {
     width: "100%",
-    aspectRatio: 1, // exact square
+    aspectRatio: 1,
     borderRadius: 12,
-    overflow: "hidden", // round corners on the image
+    overflow: "hidden",
     marginBottom: 10,
   },
   cover: { width: "100%", height: "100%" },
-
-  // fixed text region to normalize heights
   meta: { minHeight: 44, justifyContent: "center" },
   title: { color: WHITE, fontWeight: "700" },
   subtitle: { color: MUTED, marginTop: 2, fontSize: 12 },

@@ -1,9 +1,11 @@
-// SidebarMenu.tsx
+// components/SidebarMenu.tsx
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 import {
   createDrawerNavigator,
   useDrawerProgress,
+  DrawerContentScrollView,
+  DrawerItemList,
 } from "@react-navigation/drawer";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator, CardStyleInterpolators } from "@react-navigation/stack";
@@ -19,6 +21,9 @@ import SettingsScreen from "../app/(tabs)/settings";
 import LoginScreen from "../app/(tabs)/login";
 import SignUpScreen from "../app/signup";
 
+// Week 4 Activity 1
+import PlaylistBuilderScreen from "../app/(tabs)/playlistBuilder";
+
 const BG = "#121212";
 const CARD = "#181818";
 const WHITE = "#fff";
@@ -28,26 +33,40 @@ const Drawer = createDrawerNavigator();
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
+// Simple fake profile data for the drawer header
+const USER_NAME = "Francis Austria";
+const USER_TAG = "Premium listener";
+
 // 👉 Wrapper for consistent background
 function ScreenWrapper({ children }: { children: React.ReactNode }) {
   return <View style={{ flex: 1, backgroundColor: BG }}>{children}</View>;
 }
 
-// 👉 Bottom Tabs
+// 👉 Bottom Tabs (polished)
 function TabsNavigator() {
   return (
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
-        tabBarStyle: { backgroundColor: CARD },
+        tabBarStyle: {
+          backgroundColor: CARD,
+          borderTopColor: "#000",
+          height: 60,
+        },
         tabBarActiveTintColor: SPOTIFY_GREEN,
-        tabBarInactiveTintColor: WHITE,
+        tabBarInactiveTintColor: "#9b9b9b",
+        tabBarLabelStyle: {
+          fontSize: 11,
+          marginBottom: 4,
+        },
       }}
     >
       <Tab.Screen
         name="Home"
         options={{
-          tabBarIcon: ({ color }) => <FontAwesome name="home" size={18} color={color} />,
+          tabBarIcon: ({ color, focused }) => (
+            <FontAwesome name="home" size={focused ? 22 : 18} color={color} />
+          ),
         }}
       >
         {() => (
@@ -60,7 +79,10 @@ function TabsNavigator() {
       <Tab.Screen
         name="Showcase"
         options={{
-          tabBarIcon: ({ color }) => <FontAwesome name="th-large" size={18} color={color} />,
+          title: "Browse",
+          tabBarIcon: ({ color, focused }) => (
+            <FontAwesome name="th-large" size={focused ? 22 : 18} color={color} />
+          ),
         }}
       >
         {() => (
@@ -73,7 +95,9 @@ function TabsNavigator() {
       <Tab.Screen
         name="Playlists"
         options={{
-          tabBarIcon: ({ color }) => <FontAwesome name="music" size={18} color={color} />,
+          tabBarIcon: ({ color, focused }) => (
+            <FontAwesome name="music" size={focused ? 22 : 18} color={color} />
+          ),
         }}
       >
         {() => (
@@ -92,7 +116,7 @@ function AuthStack() {
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
-        cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS, // smooth slide
+        cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
       }}
     >
       <Stack.Screen name="Login" component={LoginScreen} />
@@ -112,16 +136,54 @@ function AnimatedDrawerWrapper({ children }: { children: React.ReactNode }) {
   return <Animated.View style={[{ flex: 1 }, animatedStyle]}>{children}</Animated.View>;
 }
 
+// 👉 Custom drawer content with profile header
+function CustomDrawerContent(props: any) {
+  return (
+    <DrawerContentScrollView
+      {...props}
+      contentContainerStyle={{ paddingTop: 0, backgroundColor: CARD }}
+    >
+      {/* Profile header */}
+      <View style={styles.drawerHeader}>
+        <View style={styles.avatar}>
+          <Text style={styles.avatarInitials}>F</Text>
+        </View>
+        <View style={{ flex: 1 }}>
+          <Text style={styles.drawerName} numberOfLines={1}>
+            {USER_NAME}
+          </Text>
+          <Text style={styles.drawerTag} numberOfLines={1}>
+            {USER_TAG}
+          </Text>
+        </View>
+      </View>
+
+      <View style={styles.drawerDivider} />
+
+      {/* Default list of drawer items */}
+      <DrawerItemList {...props} />
+    </DrawerContentScrollView>
+  );
+}
+
 // 👉 Main Drawer
 export default function SidebarMenu() {
   return (
     <Drawer.Navigator
+      drawerContent={(props) => <CustomDrawerContent {...props} />}
       screenOptions={{
         headerShown: false,
         drawerStyle: { backgroundColor: CARD },
         drawerActiveTintColor: SPOTIFY_GREEN,
         drawerInactiveTintColor: WHITE,
-        drawerLabelStyle: { fontWeight: "600" },
+        drawerActiveBackgroundColor: "#1f1f1f",
+        drawerInactiveBackgroundColor: "transparent",
+        drawerItemStyle: {
+          borderRadius: 999,
+          marginHorizontal: 8,
+          marginVertical: 2,
+        },
+        drawerLabelStyle: { fontWeight: "600", fontSize: 14 },
         swipeMinDistance: 20,
         drawerType: "slide",
         overlayColor: "transparent",
@@ -131,13 +193,30 @@ export default function SidebarMenu() {
       <Drawer.Screen
         name="Main"
         options={{
-          drawerIcon: ({ color }) => <FontAwesome name="bars" size={18} color={color} />,
+          drawerIcon: ({ color }) => <FontAwesome name="home" size={18} color={color} />,
           drawerLabel: "Main Tabs",
         }}
       >
         {() => (
           <AnimatedDrawerWrapper>
             <TabsNavigator />
+          </AnimatedDrawerWrapper>
+        )}
+      </Drawer.Screen>
+
+      {/* Week 4 playlist builder entry straight from drawer */}
+      <Drawer.Screen
+        name="PlaylistBuilder"
+        options={{
+          drawerIcon: ({ color }) => <FontAwesome name="list" size={18} color={color} />,
+          drawerLabel: "Playlist Builder",
+        }}
+      >
+        {() => (
+          <AnimatedDrawerWrapper>
+            <ScreenWrapper>
+              <PlaylistBuilderScreen />
+            </ScreenWrapper>
           </AnimatedDrawerWrapper>
         )}
       </Drawer.Screen>
@@ -171,4 +250,42 @@ export default function SidebarMenu() {
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  drawerHeader: {
+    paddingHorizontal: 16,
+    paddingTop: 40,
+    paddingBottom: 16,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 12,
+  },
+  avatar: {
+    width: 52,
+    height: 52,
+    borderRadius: 26,
+    backgroundColor: "#2b2b2b",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  avatarInitials: {
+    color: WHITE,
+    fontWeight: "800",
+    fontSize: 22,
+  },
+  drawerName: {
+    color: WHITE,
+    fontSize: 18,
+    fontWeight: "800",
+  },
+  drawerTag: {
+    color: "#8a8a8a",
+    fontSize: 12,
+    marginTop: 2,
+  },
+  drawerDivider: {
+    height: StyleSheet.hairlineWidth,
+    backgroundColor: "#323232",
+    marginHorizontal: 16,
+    marginBottom: 8,
+  },
+});
