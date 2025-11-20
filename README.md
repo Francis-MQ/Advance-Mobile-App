@@ -31,4 +31,13 @@ Added the following:
 
 - [x] **Navigation Persistence**  
 
+# Week 4 Activity 1: Spotify Playlist Builder App
+<img src="https://github.com/user-attachments/assets/64f92843-d55f-4ffc-a1eb-7060fd2415ab" width="250" />  <img src="https://github.com/user-attachments/assets/b21fe175-e42b-4bfe-a0d6-15bbec3864b2" width="250" />  <img src="https://github.com/user-attachments/assets/7e104c4b-0b27-4390-91bd-7ab64bf8c4cb" width="250" /> 
 
+
+# Week 4 Activity 2: Spotify Profile Creation Form
+<img src="https://github.com/user-attachments/assets/154e5c4d-ac05-42c5-bc9a-436b1de744a5" width="250" /> <img src="https://github.com/user-attachments/assets/1f09aae0-e91b-471d-9b48-0b78b6fa761d" width="250" /> 
+
+# Week 5 Activity 1: Theme Switcher
+
+# Week 5 Activity 2: Camera with Filters
