@@ -20,9 +20,13 @@ import ProfileScreen from "../app/(tabs)/profile";
 import SettingsScreen from "../app/(tabs)/settings";
 import LoginScreen from "../app/(tabs)/login";
 import SignUpScreen from "../app/signup";
+import CameraFiltersScreen from "../app/(tabs)/cameraFilters";
 
 // Week 4 Activity 1
 import PlaylistBuilderScreen from "../app/(tabs)/playlistBuilder";
+// Week 5 Activity 1
+import ThemeSettings from "@/app/(tabs)/themeSettings";
+
 
 const BG = "#121212";
 const CARD = "#181818";
@@ -103,6 +107,21 @@ function TabsNavigator() {
         {() => (
           <ScreenWrapper>
             <PlaylistsScreen />
+          </ScreenWrapper>
+        )}
+      </Tab.Screen>
+
+      <Tab.Screen
+        name="Camera"
+        options={{
+          tabBarIcon: ({ color }) => (
+            <FontAwesome name="camera" size={18} color={color} />
+          ),
+        }}
+      >
+        {() => (
+          <ScreenWrapper>
+            <CameraFiltersScreen />
           </ScreenWrapper>
         )}
       </Tab.Screen>
@@ -244,6 +263,16 @@ export default function SidebarMenu() {
         component={SettingsScreen}
         options={{
           drawerIcon: ({ color }) => <FontAwesome name="cogs" size={18} color={color} />,
+        }}
+      />
+      <Drawer.Screen
+        name="ThemeSettings"
+        component={ThemeSettings}
+        options={{
+          drawerLabel: "Theme",
+          drawerIcon: ({ color }) => (
+            <FontAwesome name="sun-o" size={18} color={color} />
+          ),
         }}
       />
     </Drawer.Navigator>
