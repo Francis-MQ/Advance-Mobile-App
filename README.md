@@ -39,5 +39,9 @@ Added the following:
 <img src="https://github.com/user-attachments/assets/154e5c4d-ac05-42c5-bc9a-436b1de744a5" width="250" /> <img src="https://github.com/user-attachments/assets/1f09aae0-e91b-471d-9b48-0b78b6fa761d" width="250" /> 
 
 # Week 5 Activity 1: Theme Switcher
+<img src="https://github.com/user-attachments/assets/58478a30-c9ae-47c5-a7ae-0fbe5524e12f" width="250" /> <img src="https://github.com/user-attachments/assets/1fa4b98f-ebd8-4f2c-9b11-0abbb72b969e" width="250" /> <img src="https://github.com/user-attachments/assets/d5b2e41f-c6e4-471d-8a2c-33e4f49563ba" width="250" /> <img src="https://github.com/user-attachments/assets/44f68a96-3567-4ec3-b7f2-5c6634c8c732" width="250" /> <img src="https://github.com/user-attachments/assets/5156c6ee-a636-4a48-8c23-904ba4f2ab6a" width="250"/>
 
 # Week 5 Activity 2: Camera with Filters
+<img src="https://github.com/user-attachments/assets/ba9a7653-eb93-47c5-8c62-ec5e6e496b3a" width="250"/> <img src="https://github.com/user-attachments/assets/008987a2-27ed-409b-9342-f42e6121a3ac" width="250"/> <img src="https://github.com/user-attachments/assets/03808238-d7d5-4e21-8f4c-74a997599dfc" width="250"/> <img src="https://github.com/user-attachments/assets/275748f0-4e3c-4655-9c57-3a8e87aaa477" width="250"/> <img src="https://github.com/user-attachments/assets/a20c18c5-b3b3-4ff5-b1da-4bb0392a6f95" width="250"/> <img src="https://github.com/user-attachments/assets/e24c6d7c-8cf0-413b-92a3-cb9e41aa8a39" width="250"/> <img src="https://github.com/user-attachments/assets/7828ac7a-73af-4379-b1bf-2e17ff14d07b" width="250"/>
+
+
