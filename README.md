@@ -44,5 +44,5 @@ Added the following:
 # Week 5 Activity 2: Camera with Filters
 <img src="https://github.com/user-attachments/assets/ba9a7653-eb93-47c5-8c62-ec5e6e496b3a" width="250"/> <img src="https://github.com/user-attachments/assets/008987a2-27ed-409b-9342-f42e6121a3ac" width="250"/> <img src="https://github.com/user-attachments/assets/03808238-d7d5-4e21-8f4c-74a997599dfc" width="250"/> <img src="https://github.com/user-attachments/assets/275748f0-4e3c-4655-9c57-3a8e87aaa477" width="250"/> <img src="https://github.com/user-attachments/assets/a20c18c5-b3b3-4ff5-b1da-4bb0392a6f95" width="250"/> <img src="https://github.com/user-attachments/assets/e24c6d7c-8cf0-413b-92a3-cb9e41aa8a39" width="250"/> <img src="https://github.com/user-attachments/assets/7828ac7a-73af-4379-b1bf-2e17ff14d07b" width="250"/>
 
-Week 6 Activity 1: Enhancing Your React Native App with Location-Based Map Features
+# Week 6 Activity 1: Enhancing Your React Native App with Location-Based Map Features
 <img src="https://github.com/user-attachments/assets/c0cba347-9f3e-41f9-872f-4e29ca49ca54" width="250"/>
