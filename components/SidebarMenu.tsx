@@ -26,7 +26,8 @@ import CameraFiltersScreen from "../app/(tabs)/cameraFilters";
 import PlaylistBuilderScreen from "../app/(tabs)/playlistBuilder";
 // Week 5 Activity 1
 import ThemeSettings from "@/app/(tabs)/themeSettings";
-
+// Week 6 Activity 1 – Map
+import MapScreen from "../app/(tabs)/map";
 
 const BG = "#121212";
 const CARD = "#181818";
@@ -114,14 +115,31 @@ function TabsNavigator() {
       <Tab.Screen
         name="Camera"
         options={{
-          tabBarIcon: ({ color }) => (
-            <FontAwesome name="camera" size={18} color={color} />
+          tabBarIcon: ({ color, focused }) => (
+            <FontAwesome name="camera" size={focused ? 22 : 18} color={color} />
           ),
         }}
       >
         {() => (
           <ScreenWrapper>
             <CameraFiltersScreen />
+          </ScreenWrapper>
+        )}
+      </Tab.Screen>
+
+      {/* ✅ Week 6 Map tab, using MapScreen */}
+      <Tab.Screen
+        name="Map"
+        options={{
+          title: "Map",
+          tabBarIcon: ({ color, focused }) => (
+            <FontAwesome name="map" size={focused ? 22 : 18} color={color} />
+          ),
+        }}
+      >
+        {() => (
+          <ScreenWrapper>
+            <MapScreen />
           </ScreenWrapper>
         )}
       </Tab.Screen>
